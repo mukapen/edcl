@@ -10,6 +10,7 @@ $config = [
     'name' => 'ICCAC Project M&E',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'defaultRoute' => 'project/index', //define default route
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -33,6 +34,9 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => false,
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\PhpManager',
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',

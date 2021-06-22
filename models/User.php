@@ -4,7 +4,7 @@ namespace app\models;
 
 use yii\base\NotSupportedException;
 use yii\db\ActiveRecord;
-use yii\helpers\Security;
+use yii\base\Security;
 use yii\web\IdentityInterface;
 
 
@@ -17,6 +17,17 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return 'user';
     }
+    
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['username', 'password'], 'required'],
+            [['username', 'password'], 'string', 'max' => 100]            
+        ];
+    }
 
     /**
      * @inheritdoc
@@ -24,8 +35,8 @@ class User extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'userid' => 'Userid',
-            'username' => 'Username',
+            'userid' => 'User ID',
+            'username' => 'User Name',
             'password' => 'Password'
         ];
     }
@@ -34,7 +45,7 @@ class User extends ActiveRecord implements IdentityInterface
     * */
 
     /**
-     * Finds an identity by the given ID.
+     * Finds an identity by the given User ID.
      *
      * @param string|int $id the ID to be looked for
      * @return IdentityInterface|null the identity object that matches the given ID.
@@ -92,7 +103,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getId()
     {
-        return $this->userid;
+        return $this->id;
     }
 
     /**

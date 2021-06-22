@@ -21,11 +21,16 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only' => ['login', 'logout', 'signup'],
                 'rules' => [
-                    [
-                        'actions' => ['logout'],
+                    [// Allow Guest user to access the login or sign-up actions
                         'allow' => true,
+                        'actions' => ['login', 'signup'],
+                        'roles' => ['?'],
+                    ],
+                    [// Allow authenticated user to acess the logout action
+                        'allow' => true,
+                        'actions' => ['logout'],
                         'roles' => ['@'],
                     ],
                 ],
@@ -125,14 +130,6 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
-    }
-
-    /**
-     * Hello World function
-    */
-    public function actionSay($message = 'Hello World XXXX')
-    {
-        return $this->render('say', ['message' => $message]);
     }
 
     /*

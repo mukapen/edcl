@@ -45,6 +45,21 @@ class IndicatorController extends Controller
     }
 
     /**
+     * Lists evaluation data for all Indicator models
+     * @return mixed
+     */
+    public function actionIndexEvalData()
+    {
+        $searchModel = new IndicatorSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index-eval-data', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
      * Displays a single Indicator model.
      * @param integer $id
      * @return mixed
@@ -92,6 +107,27 @@ class IndicatorController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+        ]);
+    }
+
+    /**
+     * Updates evaluation data for an existing Indicator model.
+     * If update is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdateEvalData($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index-eval-data']);
+        }
+
+        return $this->render('update-eval-data', [
+            'model' => $model,
+            'id' => $model->id,
         ]);
     }
 

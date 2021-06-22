@@ -52,7 +52,7 @@ AppAsset::register($this);
             ]],
 
             ['label' => 'Manage Data',  'items' => [
-                ['label' => 'Evaluation Data', 'url' => ['/indicator/index']],
+                ['label' => 'Evaluation Data', 'url' => ['/indicator/index-eval-data']],
                 ['label' => 'Monitoring Data', 'url' => ['/project-data/index']],
                 
             ]],
